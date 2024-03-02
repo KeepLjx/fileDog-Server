@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.filedog.mapper.StudentsMapper">
+
+    <resultMap id="BaseResultMap" type="com.filedog.entity.Students">
+            <id property="studentId" column="student_id" jdbcType="BIGINT"/>
+            <result property="studentName" column="student_name" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        student_id,student_name
+    </sql>
+    <select id="selectByStudentName" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from students
+        where
+        student_name = #{studentName,jdbcType=VARCHAR}
+    </select>
+    <select id="selectStudentIdByStudentName" resultMap="BaseResultMap">
+        select student_id
+        from students
+        where student_name = #{studentName,jdbcType=VARCHAR}
+    </select>
+</mapper>

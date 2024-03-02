@@ -1,0 +1,42 @@
+server:
+  port: 9999
+# \u914D\u7F6E\u6570\u636E\u6E90\u4FE1\u606F
+spring:
+  profiles:
+    active: dev
+  main:
+    allow-circular-references: true
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 150MB
+  datasource:
+    driver-class-name: ${filedog.mysql.driver-class-name}
+    type: ${filedog.mysql.type}
+    url: ${filedog.mysql.url}
+    username: ${filedog.mysql.username}
+    password: ${filedog.mysql.password}
+  data:
+    redis:
+      host: ${filedog.redis.host}
+      port: ${filedog.redis.port}
+      password: ${filedog.redis.password}
+      database: ${filedog.redis.database}
+logging:
+  level:
+    com:
+      filedog:
+        mapper: debug
+        service: info
+        controller: info
+
+filedog:
+
+  alioss:
+    endpoint: ${filedog.alioss.endpoint}
+    access-key-id: ${filedog.alioss.access-key-id}
+    access-key-secret: ${filedog.alioss.access-key-secret}
+    bucket-name: ${filedog.alioss.bucket-name}
+  wechat:
+    appid: ${filedog.wechat.appid}
+    secret: ${filedog.wechat.secret}

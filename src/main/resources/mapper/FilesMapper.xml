@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.filedog.mapper.FilesMapper">
+
+    <resultMap id="BaseResultMap" type="com.filedog.entity.Files">
+            <id property="fileId" column="file_id" jdbcType="BIGINT"/>
+            <result property="submiter" column="submiter" jdbcType="VARCHAR"/>
+            <result property="uploadTime" column="upload_time" jdbcType="TIMESTAMP"/>
+            <result property="folderName" column="folder_name" jdbcType="VARCHAR"/>
+            <result property="fileSuffix" column="file_suffix" jdbcType="VARCHAR"/>
+            <result property="fileRule" column="file_rule" jdbcType="VARCHAR"/>
+            <result property="collector" column="collector" jdbcType="VARCHAR"/>
+            <result property="filePath" column="file_path" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        submiter,upload_time,
+        folder_name,file_suffix,file_rule,
+        collector,file_path
+    </sql>
+    <select id="selectAllByFolderName" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from files
+        <where>
+            <if test="folderName != null and folderName != ''">
+                and folder_name = #{folderName}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectAllByFilePath" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from files
+        where
+        file_path = #{filePath,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByFilePath">
+        delete
+        from files
+        where file_path = #{filePath,jdbcType=VARCHAR}
+    </delete>
+</mapper>

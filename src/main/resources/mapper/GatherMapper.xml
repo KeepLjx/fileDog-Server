@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.filedog.mapper.GatherMapper">
+
+    <resultMap id="BaseResultMap" type="com.filedog.entity.Gather">
+            <result property="collector" column="collector" jdbcType="VARCHAR"/>
+            <result property="folderName" column="folder_name" jdbcType="VARCHAR"/>
+            <result property="fileRule" column="file_rule" jdbcType="VARCHAR"/>
+            <result property="fileSuffix" column="file_suffix" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        collector,folder_name,file_rule,
+        file_suffix
+    </sql>
+    <select id="selectCollectorAndFolderName" resultMap="BaseResultMap">
+        select collector, folder_name
+        from gather
+    </select>
+    <select id="selectByCollectorAndFolderName" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from gather
+        where
+        collector = #{collector,jdbcType=VARCHAR}
+        AND folder_name = #{folderName,jdbcType=VARCHAR}
+    </select>
+    <select id="selectFileSuffixByCollectorAndFolderName" resultMap="BaseResultMap">
+        select file_suffix
+        from gather
+        where collector = #{collector,jdbcType=VARCHAR}
+          AND folder_name = #{folderName,jdbcType=VARCHAR}
+    </select>
+    <select id="selectFileRule" resultMap="BaseResultMap">
+        select file_rule
+        from gather
+    </select>
+    <select id="selectFileRuleByCollectorAndFolderName" resultMap="BaseResultMap">
+        select file_rule
+        from gather
+        where collector = #{collector,jdbcType=VARCHAR}
+          AND folder_name = #{folderName,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByFolderName">
+        delete
+        from gather
+        where folder_name = #{folderName,jdbcType=VARCHAR}
+    </delete>
+    <delete id="deleteByCollectorAndFolderName">
+        delete
+        from gather
+        where collector = #{collector,jdbcType=VARCHAR}
+          AND folder_name = #{folderName,jdbcType=VARCHAR}
+    </delete>
+</mapper>

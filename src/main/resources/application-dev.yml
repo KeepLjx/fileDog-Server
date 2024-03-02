@@ -1,0 +1,17 @@
+filedog:
+  alioss:
+    endpoint: oss-cn-beijing.aliyuncs.com
+    access-key-id: LTAI5tE5WKwASov6AE1i3xoy
+    access-key-secret: DopouX54emaZ3fsehnQgXsovKUOLbR
+    bucket-name: filedog
+  redis:
+    host: 39.101.140.144
+    port: 6379
+    password: 200212
+    database: 0
+  mysql:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://39.101.140.144:3306/filedog?serverTimezone=Asia/Shanghai
+    username: root
+    password: 200212
