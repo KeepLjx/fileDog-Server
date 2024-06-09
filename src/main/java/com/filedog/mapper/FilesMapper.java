@@ -1,4 +1,5 @@
 package com.filedog.mapper;
+import java.time.LocalDateTime;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -36,6 +37,13 @@ public interface FilesMapper extends BaseMapper<Files> {
      * @return
      */
     int deleteByFilePath(@Param("filePath") String filePath);
+
+    /**
+     * 更新上传时间
+     * @param uploadTime
+     * @return
+     */
+    int updateUploadTime(@Param("uploadTime") LocalDateTime uploadTime);
 }
 
 

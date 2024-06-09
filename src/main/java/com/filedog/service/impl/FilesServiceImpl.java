@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Mono;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -50,7 +51,8 @@ public class FilesServiceImpl extends ServiceImpl<FilesMapper, Files>
     public void insertFile(Files files) {
         //若文件表中已经存在文件则不用插入
         List<Files> isExist = filesMapper.selectAllByFilePath(files.getFilePath());
-        if (isExist.size() != 0) {
+        if (!isExist.isEmpty()) {
+            filesMapper.updateUploadTime(LocalDateTime.now());
             return;
         }
         //设置文件上传日期

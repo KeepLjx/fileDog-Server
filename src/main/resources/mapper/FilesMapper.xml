@@ -43,4 +43,8 @@
         from files
         where file_path = #{filePath,jdbcType=VARCHAR}
     </delete>
+    <update id="updateUploadTime">
+        update files
+        set upload_time = #{uploadTime}
+    </update>
 </mapper>
