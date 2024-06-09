@@ -52,7 +52,7 @@ public class FilesServiceImpl extends ServiceImpl<FilesMapper, Files>
         //若文件表中已经存在文件则不用插入
         List<Files> isExist = filesMapper.selectAllByFilePath(files.getFilePath());
         if (!isExist.isEmpty()) {
-            filesMapper.updateUploadTime(LocalDateTime.now());
+            filesMapper.updateUploadTimeByFilePath(LocalDateTime.now(),files.getFilePath());
             return;
         }
         //设置文件上传日期

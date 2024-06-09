@@ -47,4 +47,9 @@
         update files
         set upload_time = #{uploadTime}
     </update>
+    <update id="updateUploadTimeByFilePath">
+        update files
+        set upload_time = #{uploadTime}
+        where file_path = #{filePath,jdbcType=VARCHAR}
+    </update>
 </mapper>

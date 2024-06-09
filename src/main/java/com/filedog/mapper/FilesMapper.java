@@ -38,12 +38,16 @@ public interface FilesMapper extends BaseMapper<Files> {
      */
     int deleteByFilePath(@Param("filePath") String filePath);
 
+
     /**
-     * 更新上传时间
+     * 更新提交者提交文件的上传时间
      * @param uploadTime
+     * @param filePath
      * @return
      */
-    int updateUploadTime(@Param("uploadTime") LocalDateTime uploadTime);
+    int updateUploadTimeByFilePath(@Param("uploadTime") LocalDateTime uploadTime, @Param("filePath") String filePath);
+
+
 }
 
 
